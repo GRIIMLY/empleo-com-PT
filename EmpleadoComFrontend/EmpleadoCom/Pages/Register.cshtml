@@ -1,0 +1,32 @@
+﻿@page
+@model EmpleadoComFrontend.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Registro</h2>
+
+<form method="post" class="container">
+    <div class="form-group">
+        <label asp-for="User.NombreUsuario" class="control-label">Usuario</label>
+        <input asp-for="User.NombreUsuario" class="form-control" maxlength="20" />
+        <span asp-validation-for="User.NombreUsuario" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="User.Contrasenia" class="control-label">Contraseña</label>
+        <input asp-for="User.Contrasenia" type="password" class="form-control" maxlength="20" />
+        <span asp-validation-for="User.Contrasenia" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="User.TipoUsuario" class="control-label">Tipo de usuario</label>
+        <select asp-for="User.TipoUsuario" class="form-control">
+            <option value="Empleador">Empleador</option>
+            <option value="Demandante">Demandante</option>
+        </select>
+        <span asp-validation-for="User.TipoUsuario" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

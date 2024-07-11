@@ -1,0 +1,98 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<header class="bg-primary text-white text-center py-4">
+    <div class="container">
+        <h1>Portal de Empleo</h1>
+        <p>Encuentra tu trabajo ideal</p>
+    </div>
+</header>
+
+<section class="hero-section">
+    <div class="container">
+        <h1 class="display-4">Bienvenido a tu próximo empleo</h1>
+        <p class="lead">Busca entre miles de ofertas de trabajo y encuentra la que mejor se adapta a ti</p>
+        <form method="get" asp-page="/Index" class="form-inline justify-content-center mt-4">
+            <input class="form-control mr-2" type="search" placeholder="Buscar empleos por habilidades" aria-label="Buscar" name="habilidades">
+            <button class="btn btn-success mt-2" type="submit">Buscar</button>
+        </form>
+    </div>
+</section>
+
+<section class="container my-5">
+    <h2 class="text-center mb-4">Trabajos Destacados</h2>
+    <div class="row">
+        @foreach (var oferta in Model.descripcionTrabajoModels)
+        {
+            <div class="col-md-4">
+                <div class="card job-card">
+                    <div class="card-body">
+                        <h5 class="card-title">@oferta.TituloTrabajo</h5>
+                        <p class="card-text">@($"{oferta.NombreEmpresa} - {oferta.LocalizacionEmpresa}")</p>
+                        <br>
+                        <p>Fecha de publicación:@($"{oferta.FechaPublicacion}") </p>
+                        <p class="card-text"><strong>Habilidades requeridas:</strong></p>
+                        <ul class="card-text">
+                            @foreach (var habilidad in oferta.HabilidadesRequeridas)
+                            {
+                                <li>@habilidad</li>
+                            }
+                        </ul>
+                        <a href="@oferta.EnlaceVerMas" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="testimonial text-center">
+    <div class="container">
+        <h2 class="mb-4">Testimonios</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">"Gracias a este portal, encontré el trabajo de mis sueños."</p>
+                        <h5 class="card-title">- Juan Pérez</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">"La búsqueda de empleo nunca fue tan fácil y rápida."</p>
+                        <h5 class="card-title">- María López</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">"Encontré muchas oportunidades que se ajustaban a mi perfil."</p>
+                        <h5 class="card-title">- Carlos Martínez</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    @*       <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var TipoUsuario = '@TempData["TipoUsuario"]';
+                var NombreUsuario = '@TempData["NombreUsuario"]';
+                var UsuarioId = '@TempData["UsuarioId"]';
+
+                if (TipoUsuario && NombreUsuario && UsuarioId) {
+                    sessionStorage.setItem("TipoUsuario", TipoUsuario);
+                    sessionStorage.setItem("NombreUsuario", NombreUsuario);
+                    sessionStorage.setItem("UsuarioId", UsuarioId);
+                }
+            });
+        </script>*@
+}

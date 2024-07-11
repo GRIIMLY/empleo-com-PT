@@ -1,0 +1,71 @@
+﻿@page
+@model EmpleadoComFrontend.Pages.PerfilDemandanteModel
+@{
+}
+@{
+    ViewData["Title"] = "Crear Perfil de Demandante de Empleo";
+}
+
+<h2>Crear Perfil</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="demandante.Nombre" class="control-label"></label>
+        <input asp-for="demandante.Nombre" class="form-control" />
+        <span asp-validation-for="demandante.Nombre" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="demandante.Edad" class="control-label"></label>
+        <input asp-for="demandante.Edad" class="form-control" />
+        <span asp-validation-for="demandante.Edad" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="demandante.Contacto" class="control-label">Correo</label>
+        <input asp-for="demandante.Contacto" class="form-control" />
+        <span asp-validation-for="demandante.Contacto" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="demandante.NivelEducacion" class="control-label">Nivel Educacion</label>
+        <input asp-for="demandante.NivelEducacion" class="form-control" />
+        <span asp-validation-for="demandante.NivelEducacion" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="demandante.Notas" class="control-label"></label>
+        <textarea asp-for="demandante.Notas" class="form-control"></textarea>
+        <span asp-validation-for="demandante.Notas" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="demandante.ExperienciaLaboral" class="control-label">Experiencia Laboral</label>
+        <textarea asp-for="demandante.ExperienciaLaboral" class="form-control"></textarea>
+        <span asp-validation-for="demandante.ExperienciaLaboral" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Habilidades</label>
+        <div class="d-flex justify-content-between">
+            @foreach (var habilidad in Model.habilidades)
+            {
+                <div class="bg-dark text-light" style="display: inline-block; padding: 5px; border-radius:10px;">
+                    <input class="form-check-input" type="checkbox"
+                       name="habilidadesSeleccionadas"
+                       checked="@Model.habilidadesSeleccionadas.Contains(habilidad.HabilidadId)"
+                       value="@habilidad.HabilidadId" id="skill_@habilidad.HabilidadId" />
+                    <label class="form-check-label" for="skill_@habilidad.HabilidadId">@habilidad.NombreHabilidad</label>
+                </div>
+            }
+        </div>
+
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Crear" class="btn btn-primary mt-2" />
+    </div>
+</form>
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+   
+}
+
+
